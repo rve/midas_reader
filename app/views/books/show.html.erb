@@ -1,0 +1,148 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Midas Reader</title>
+    <script type="text/javascript"> 
+        var page_num = <%= @page %>;
+        var book_id= <%= @book.id %>;
+        var prev_pgae = <%= @page-1 %>;
+        var next_page = <%= @page+1 %>
+        var max_page_num  = <%= @book.max_page_num %>
+</script>
+<script type="text/javascript">
+  var server_page_num = page_num;
+  function post_it(){
+    //console.log("post_it start");
+    if (page_num > max_page_num-1)
+      page_num = max_page_num-1;
+    $.post("/print/", {
+current_page:page_num+1
+},
+function(data) {
+//console.log("data: "+data);
+alert(data);
+});
+}
+function post_it_back(){
+  //console.log(page_num);
+  if ( page_num -1 == 0)
+    page_num = 2;
+  $.post("/print/", {
+current_page:page_num-1
+},
+function(data) {
+//console.log(page_num)
+//location.href="/reader/{{book_id}}/"+page_num.toString(10);
+});
+}
+function get_it() {
+  $.get("/print/", function(data){
+      //console.log("get_It data: " + data);
+      server_page_num = data.page_num;
+      //console.log("server_page_num "+server_page_num);
+      });
+}
+function startTimer(){
+  get_it();
+  if ( server_page_num != undefined && server_page_num == page_num)
+  {
+    setTimeout("startTimer()", 1000);
+    //console.log("cmp: "+page_num);
+  }
+  else
+  {
+    location.href="/reader/{{book_id}}/"+server_page_num;
+    //console.log("jump to "+ server_page_num);
+  }
+}
+
+</script>
+  </head>
+  <body onload="SetArray(100);init2();startTimer();onLoadEvent()" >
+
+    <!--rolling comments-->
+    <div class="whole" id="wholeId" onmouseover="stop()" onmouseout="goon()">
+      <div id="scrollId" class="scroll"></div>
+      <input type="button" class="agree" value="Agree(0)"/>
+      <input type="button" class="against" value="Against(0)"/>
+    </div>
+    <!--logo part-->
+    <div class="logo">
+      <a href="/index"><img src="/images/logo.png" class="tipTip" title="MidaReader"/></a>
+    </div>
+
+    <!--comment part-->
+
+    <div class="commentBlock" style="display:none">
+      <input type="button" class="addCm" value="Comment"/>
+      <input type="button" class="exitComment" value="Close"/>
+      <br />
+      <textarea id="commentId" rows="4" class="commentTekjkxt" cols="30"></textarea>
+    </div>
+    <div class="nearby_comment" style="display:none">
+      <img src="/images/nearby_comment_bg.png" class="nearby_comment_bg"/>
+      <div class="nearby_comment_content"></div>
+    </div>
+    <!--left_button part-->
+    <div class="left_button">
+      <div>
+        <img src="/images/comment_close.png" id="comment_close" onclick="comment_show()" class="tipTip" title="Show hotest comment"/>
+        <img src="/images/comment_open.png" id="comment_open" style="display:none" onclick="comment_hide()" class="tipTip" title="Hide hotest comment"/>
+      </div>
+      <div>
+        <img src="/images/comment_close.png" onclick="comment_show_up()" class="comment_show_up tipTip" title="Rolling comments"/>
+      </div>
+    </div>
+    <!--Show text part-->
+    <% if @book %>
+    <div id="container">
+      <div class="title_line">
+        <img src="/images/title_line.png"/>
+      </div>
+      <div class="page"> 
+        <div class="content" id="contentId">
+        <% for i in ((@page-1)*20)..(@page*20) %>
+          <p> <%= @file[i] %> </p>
+        <% end %>
+        </div>
+        <hr/><hr/>
+    <% else %>
+        <div class="content">Please refresh.</div>
+    <% end %>
+      </div>
+    </div>
+
+    <!--page_button part-->
+    <div class="page_button">
+      <div>
+  <%= link_to "Next", "#{book_path(@book)}?page=#{@page+1}" %> 
+      </div>
+      <div>
+      </div>
+  <%= link_to "Prev", "#{book_path(@book)}?page=#{@page-1}" %> 
+    </div>
+
+    <img src="/images/pen.png" class="note tipTip" title="Take note"/>
+
+    <!-- note part-->
+    <div id="noteId" style="display:none"/>
+      <input onclick="Selectall()" type="button" value="All" class="buttoncss"/>
+        <input type="button" class="save" value="Save" >
+      <div class="word">Add Note:
+        <input type="text" name="addtext" id="addId" size="15"/>
+      </div>
+
+      <input onclick="AddText(page_num,document.all.addtext.value)" type="button" value="Add" class="buttoncss"/>
+      <br/>
+      <textarea onkeyup="SetPage()" id="txtid" rows="10" cols="45" ></textarea>
+      <br/>
+    </div>
+
+    <!--appear comment-->
+    <div id="CNID" class="C_and_N" style="display:none">
+      <img src="/images/comment.png" class="comment tipTip" title="Comment"/>
+    </div>
+    <!--loading -->
+  </body>
+</html>

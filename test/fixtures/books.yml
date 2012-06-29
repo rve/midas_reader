@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  author: MyString
+  book_name: MyString
+  cover_path: MyString
+  txt_path: MyString
+  max_page_num: 1
+
+two:
+  author: MyString
+  book_name: MyString
+  cover_path: MyString
+  txt_path: MyString
+  max_page_num: 1

@@ -1,0 +1,12 @@
+<p>
+  <h2> <%= @book.book_name %> </h2>
+</p>
+<h1><%= @page %></h1>
+<% for i in ((@page-1)*50)..(@page*50) %>
+  <p> <%= @file[i] %> </p>
+<% end %>
+
+<p>  <%= link_to "Next", "#{book_path(@book)}?page=#{@page+1}" %> </p>
+<p>  <%= link_to "Prev", "#{book_path(@book)}?page=#{@page-1}" %> </p>
+
+

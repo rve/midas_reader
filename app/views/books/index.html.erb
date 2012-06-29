@@ -1,0 +1,31 @@
+<h1>Listing books</h1>
+
+<table>
+  <tr>
+    <th>Author</th>
+    <th>Book name</th>
+    <th>Cover path</th>
+    <th>Txt path</th>
+    <th>Max page num</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @books.each do |book| %>
+  <tr>
+    <td><%= book.author %></td>
+    <td><%= book.book_name %></td>
+    <td><%= image_tag(book.cover_path)%></td>
+    <td><%= book.txt_path %></td>
+    <td><%= book.max_page_num %></td>
+    <td><%= link_to 'Show', book %></td>
+    <td><%= link_to 'Edit', edit_book_path(book) %></td>
+    <td><%= link_to 'Destroy', book, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Book', new_book_path %>

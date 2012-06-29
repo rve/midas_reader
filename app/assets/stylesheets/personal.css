@@ -1,0 +1,39 @@
+.ceil
+{
+  position:fixed;
+  width:100%;
+  background:#676766;
+}
+
+/* the inputbox css */
+.inputbox {
+	background:#f7f7f7;
+	background:-moz-linear-gradient(90deg, #ccc, #fff); /* Firefox */
+	background:-webkit-gradient(linear, left top, left bottom, from(#fff), to(#ccc)); /* Webkit */
+	border:1px solid #aaa;
+	-moz-border-radius:10px;
+	-webkit-border-radius:5px;
+	-moz-box-shadow:0 0 5px #aaa;
+	-webkit-box-shadow:0 0 5px #aaa;
+	margin:20px auto 0;
+	padding:10px;
+	width:240px;
+
+}
+
+#canvasId
+{
+  margin-top:50px;
+  margin-left:200px;
+}
+
+.logo
+{
+  margin-left:30px;
+}
+
+.second_part
+{
+  position:relative;
+  top:100px;
+}
