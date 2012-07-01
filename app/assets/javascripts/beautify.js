@@ -46,11 +46,6 @@ function comment_show_up()
       comment_up_flag=(comment_up_flag+1) % 2;
 }
 
-$(function()
-  {
-    $(".tipTip").tipTip();
-  });
-
 $(document).ready(function()
                   {
                     var h=$(".content").height();
