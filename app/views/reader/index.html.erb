@@ -1,62 +1,62 @@
 <!DOCTYPE HTML>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Midas Reader</title>
-    <script type="text/javascript" src="/static/js/jquery.js"></script>
-    <link rel="stylesheet" type="text/css" href="/static/css/index.css" />
-  </head>
-  <body>
-    <div class="left_part">
-      <!--Activity part-->
-      <div class="activity">
-        <img src="/images/index/book_tag2.png" class="tag2" />-->
-        <div class="act_block">
-          <a href="/index"><img src="/images/index/activity1.png" width="300" height="200" class="act1"></a>
-          <a href="/index"><img src="/images/index/activity2.png" width="300" height="200" class="act2"></a>
-        </div>
-        <div class="act_logo"> 
-          <img src="/images/index/activity_logo.png" class="act_logo1"/>
-          <img src="/images/index/activity_logo.png" class="act_logo2"/>
-        </div>
-      </div>
+    <head>
+        <meta charset="UTF-8">
+        <title>Midas Reader</title>
+        <script type="text/javascript" src="/static/js/jquery.js"></script>
+        <link rel="stylesheet" type="text/css" href="/static/css/index.css" />
+    </head>
+    <body>
+        <div class="left_part">
+            <!--Activity part-->
+            <div class="activity">
+                <img src="/images/index/book_tag2.png" class="tag2" />
+                <div class="act_block">
+                    <a href="/index"><img src="/images/index/activity1.png" width="300" height="200" class="act1"></a>
+                    <a href="/index"><img src="/images/index/activity2.png" width="300" height="200" class="act2"></a>
+                </div>
+                <div class="act_logo"> 
+                    <img src="/images/index/activity_logo.png" class="act_logo1"/>
+                    <img src="/images/index/activity_logo.png" class="act_logo2"/>
+                </div>
+            </div>
 
-      <img src="/images/index/separate.png" width="600"class="separation"/>
-      <div class="book_list">
-        {% if book_list %}
-        <article> {% for book in book_list%}</article>
-        <a href="/reader/{{book.id}}/1/" class="book"><img src="{{book.cover_path}}" alt="Cover of {{book.book_name}}" width="180" height="280"/></a>
-        {%endfor%}
-        {% else %}
-        <article>Error, plz refresh.</article>
-        {% endif %}
-      </div>
-    </div>
+            <img src="/images/index/separate.png" width="600"class="separation"/>
+            <div class="book_list">
+                <% if @books %>
+                    <article> <% for book in @books %></article>
+                        <a href="/books/<%=book.id%>" class="book"><img src="<%=book.cover_path%>" alt="Cover of <%= book.book_name %>" width="180" height="280"/></a>
+                    <% end %>
+                <% else %>
+                    <article>Error, plz refresh.</article>
+                <% end %>
+            </div>
+        </div>
 
-    <div class="right_part"> 
-      <img src="/images/index/logo.png" class="logo" height="50"/>
-      <div class="user">
-        <a href="/personal"><img src="/images/index/user.png" class="user_image"/></a>
-        <a href="/personal">
+        <div class="right_part"> 
+            <img src="/images/index/logo.png" class="logo" height="50"/>
+            <div class="user">
+                <a href="/personal"><img src="/images/index/user.png" class="user_image"/></a>
+                <a href="/personal">
 <img src="/images/index/user.png" class="user_image"/>
 </a>
-        <nav class="user_name">
-            <% if 0 %>
-                <!-- user to be implemented -->
-            <% else %>
-          <a href="/login" class="button">Login</a>
-          <a href="#" class="button">Regist</a>
-      <% end %>
-        </nav>
-      </div>
-      <canvas id="canvasId" width="300px" height="100px" style="display:none" >
-        Your browser doesn't support canvas.
-      </canvas>
-      <div class="search">
-        <input type="text" class="input" placeholder="To search"/>
-        <input type="image" src="/images/index/search_button.png" class="search_button"/>
-      </div> 
-    </div>
+                <nav class="user_name">
+                    <% if 0 %>
+                        <!-- user to be implemented -->
+                    <% else %>
+                        <a href="/login" class="button">Login</a>
+                        <a href="#" class="button">Regist</a>
+                    <% end %>
+                </nav>
+            </div>
+            <canvas id="canvasId" width="300px" height="100px" style="display:none" >
+                Your browser doesn't support canvas.
+            </canvas>
+            <div class="search">
+                <input type="text" class="input" placeholder="To search"/>
+                <input type="image" src="/images/index/search_button.png" class="search_button"/>
+            </div> 
+        </div>
 
-  </body>
+    </body>
 </html>
