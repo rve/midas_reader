@@ -1,5 +1,8 @@
 Midas::Application.routes.draw do
+  get "reader/index"
+
   resources :books
+  root :to => 'reader#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
