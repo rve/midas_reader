@@ -1,3 +1,8 @@
+//
+$(document).ready(function(){
+  $(".content").annotator();
+})
+
 //******************************def*****************************//
 function def()
 {
