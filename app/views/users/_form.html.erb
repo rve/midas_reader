@@ -1,41 +1,41 @@
-<div class="midas_form">
+<div class="whole">
+  <img src="/images/logo.png" class="logo"/>
 
-<%= form_for @user do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %>
-        prohibited this user from being saved:</h2>
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
+  <%= form_for (@user) do |f| %>
+    <% if @user.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@user.errors.count, "error") %>
+          prohibited this user from being saved:</h2>
+        <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+
+      <div>
+        <article class="article">用户名:</article>
+       <%= f.text_field :name, :size => 40 , :class => "input username"%>
+      </div>
+
+      <div>
+        <article class="article">密码:</article>
+        <%= f.password_field :password, :size => 40 , :class => "input password" %>
+      </div>
+
+      <div>
+        <%= f.label :password_confirmation, 'Confirm' %>:
+        <%= f.password_field :password_confirmation, :size => 40, :class => "input password" %>
+      </div>
+
+      <div>
+        <%= f.submit :class => "button"%>
+      </div>
+
+      <a href="#" class="button">注册</a>
+      <a href="" class="forget">忘记密码？</a>
   <% end %>
-
-  <fieldset>
-  <legend>Enter User Details</legend>
-
-  <div>
-    <%= f.label :name %>:
-    <%= f.text_field :name, :size => 40 %>
-  </div>
-
-  <div>
-    <%= f.label :password, 'Password' %>:
-    <%= f.password_field :password, :size => 40 %>
-  </div>
-
-  <div>
-    <%= f.label :password_confirmation, 'Confirm' %>:
-    <%= f.password_field :password_confirmation, :size => 40 %>
-  </div>
-
-  <div>
-    <%= f.submit %>
-  </div>
-
-  </fieldset>
-<% end %>
 
 </div>

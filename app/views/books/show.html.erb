@@ -69,11 +69,11 @@
     <!--page_button part-->
     <div class="page_button">
       <div>
-  <%= link_to "Next", "#{book_path(@book)}?page=#{@page+1}" %> 
+  <a href = "<%=book_path(@book)%>?page=<%=@page+1%>"> Next </a>
       </div>
       <div>
       </div>
-  <%= link_to "Prev", "#{book_path(@book)}?page=#{@page-1}" %> 
+  <a href = "<%=book_path(@book)%>?page=<%=@page-1%>"> Prev</a>
     </div>
 
     <img src="/images/pen.png" class="note tipTip" title="Take note"/>
