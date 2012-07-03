@@ -6,7 +6,7 @@
     <script type="text/javascript"> 
         var page_num = <%= @page %>;
         var book_id= <%= @book.id %>;
-        var prev_pgae = <%= @page-1 %>;
+        var prev_page = <%= @page-1 %>;
         var next_page = <%= @page+1 %>
         var max_page_num  = <%= @book.max_page_num %>
 </script>
@@ -69,11 +69,11 @@
     <!--page_button part-->
     <div class="page_button">
       <div>
-  <a href = "<%=book_path(@book)%>?page=<%=@page+1%>"> Next </a>
+  <a href = "<%=book_path(@book)%>?page=<%=@page+1%>" class="next_page"> Next </a>
       </div>
       <div>
       </div>
-  <a href = "<%=book_path(@book)%>?page=<%=@page-1%>"> Prev</a>
+  <a href = "<%=book_path(@book)%>?page=<%=@page-1%>" class="prev_page"> Prev</a>
     </div>
 
     <img src="/images/pen.png" class="note tipTip" title="Take note"/>
