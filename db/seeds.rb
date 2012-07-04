@@ -10,5 +10,5 @@ Book.delete_all
 Book.create(:author => 'Shakespeare',
            :book_name => 'Othello',
            :cover_path => '/covers/Othello.jpg',
-           :txt_path => '/txt/Othello.txt',
+           :txt_path => 'app/assets/txt/Othello.txt',
            :max_page_num => 10)
