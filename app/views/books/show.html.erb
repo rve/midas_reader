@@ -1,127 +1,95 @@
 <!DOCTYPE HTML>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Midas Reader</title>
-    <script type="text/javascript"> 
-        var page_num = <%= @page %>;
-        var book_id= <%= @book.id %>;
-        var prev_page = <%= @page-1 %>;
-        var next_page = <%= @page+1 %>
-        var max_page_num  = <%= @book.max_page_num %>
-</script>
-  </head>
-  <body onload="SetArray(100);init2();onLoadEvent()" >
+    <head>
+        <meta charset="UTF-8">
+        <title>Midas Reader</title>
+        <script type="text/javascript"> 
+            var page_num = <%= @page %>;
+            var book_id= <%= @book.id %>;
+            var prev_page = <%= @page-1 %>;
+            var next_page = <%= @page+1 %>
+            var max_page_num  = <%= @book.max_page_num %>
+            </script>
+        </head>
+        <body onload="def();onLoadEvent()" >
 
-    <!--rolling comments-->
-    <div class="whole" id="wholeId" onmouseover="stop()" onmouseout="goon()">
-      <div id="scrollId" class="scroll"></div>
-      <input type="button" class="agree" value="Agree(0)"/>
-      <input type="button" class="against" value="Against(0)"/>
-    </div>
-  <body onload="SetArray(100);init2();startTimer();onLoadEvent()" >
-    <!--logo part-->
-    <div class="logo">
-      <a href="/index"><img src="/images/logo.png" class="tipTip" title="MidaReader"/></a>
-    </div>
+            <!--logo part-->
+            <div class="show_logo">
+                <a href="/index"><img src="/images/logo.png" title="MidaReader"/></a>
+            </div>
+            <!--left_button part-->
+            <img src="/images/comment_close.png" id="grey_tag" />
+            <img src="/images/comment_open.png" id="red_tag"/>
 
-    <!--comment part-->
+            <!--Show text part-->
+            <% if @book %>
+                <div id="container">
+                    <div class="title_line">
+                        <img src="/images/title_line.png"/>
+                    </div>
+                    <div class="page"> 
+                        <div class="content" id="contentId">
+                            <% for i in ((@page-1)*20)..(@page*20) %>
+                                <p> <%= @file[i] %> </p>
+                            <% end %>
+                        </div>
+                        <hr/><hr/>
+                    <% else %>
+                        <div class="content">Please refresh.</div>
+                    <% end %>
+                </div>
+            </div>
 
-    <div class="commentBlock" style="display:none">
-      <input type="button" class="addCm" value="Comment"/>
-      <input type="button" class="exitComment" value="Close"/>
-      <br />
-      <textarea id="commentId" rows="4" class="commentTekjkxt" cols="30"></textarea>
-    </div>
-    <div class="nearby_comment" style="display:none">
-      <img src="/images/nearby_comment_bg.png" class="nearby_comment_bg"/>
-      <div class="nearby_comment_content"></div>
-    </div>
-    <!--left_button part-->
-    <div class="left_button">
-      <div>
-        <img src="/images/comment_close.png" id="comment_close" onclick="comment_show()" class="tipTip" title="Show hotest comment"/>
-        <img src="/images/comment_open.png" id="comment_open" style="display:none" onclick="comment_hide()" class="tipTip" title="Hide hotest comment"/>
-      </div>
-      <div>
-        <img src="/images/comment_close.png" onclick="comment_show_up()" class="comment_show_up tipTip" title="Rolling comments"/>
-      </div>
-    </div>
-    <!--Show text part-->
-    <% if @book %>
-    <div id="container">
-      <div class="title_line">
-        <img src="/images/title_line.png"/>
-      </div>
-      <div class="page"> 
-        <div class="content" id="contentId">
-        <% for i in ((@page-1)*20)..(@page*20) %>
-          <p> <%= @file[i] %> </p>
-        <% end %>
-        </div>
-        <hr/><hr/>
-    <% else %>
-        <div class="content">Please refresh.</div>
-    <% end %>
-      </div>
-    </div>
+            <!--page_button part-->
+            <div class="page_button">
+                <div>
+                    <a href = "<%=book_path(@book)%>?page=<%=@page+1%>" id="next_page" class="show_button"></br></br></br>next</a>
+                </div>
+                <div>
+                    <a href = "<%=book_path(@book)%>?page=<%=@page-1%>" id="prev_page" class="show_button"></br></br></br>prev</a>
+                </div>
+            </div>
 
-    <!--page_button part-->
-    <div class="page_button">
-      <div>
-  <a href = "<%=book_path(@book)%>?page=<%=@page+1%>" id="next_page"> Next </a>
-      </div>
-      <div>
-      </div>
-  <a href = "<%=book_path(@book)%>?page=<%=@page-1%>" id="prev_page"> Prev</a>
-    </div>
+            <img src="/images/pen.png" class="note" title="Take note"/>
 
-    <img src="/images/pen.png" class="note tipTip" title="Take note"/>
-
-    <!-- note part-->
-    <div class="RTE" style="display:none">
-      <div style="width:500px; text-align:left; margin-bottom:10px ">
-        <input type="button" id="bold" style="height:21px; width:21px; font-weight:bold;" value="B" onClick="fontEdit('bold')" />
-        <input type="button" id="italic" style="height:21px; width:21px; font-style:italic;" value="I" onClick="fontEdit('italic')" />
-        <input type="button" id="underline" style="height:21px; width:21px; text-decoration:underline;" value="U" onClick="fontEdit('underline')" /> | 
-        <input type="button" style="height:21px; width:21px;"value="L" onClick="fontEdit('justifyleft')" title="align left" />
-        <input type="button" style="height:21px; width:21px;"value="C" onClick="fontEdit('justifycenter')" title="center" />
-        <input type="button" style="height:21px; width:21px;"value="R" onClick="fontEdit('justifyright')" title="align right" /> | 
-        <select id="fonts" onChange="fontEdit('fontname',this[this.selectedIndex].value)">
-          <option value="Arial">Arial</option>
-          <option value="Comic Sans MS">Comic Sans MS</option>
-          <option value="Courier New">Courier New</option>
-          <option value="Monotype Corsiva">Monotype</option>
-          <option value="Tahoma">Tahoma</option>
-          <option value="Times">Times</option>
-        </select>
-        <select id="size" onChange="fontEdit('fontsize',this[this.selectedIndex].value)">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-        <select id="color" onChange="fontEdit('ForeColor',this[this.selectedIndex].value)">
-          <option value="black">black</option>
-          <option style="color:red;" value="red">red</option>
-          <option style="color:blue;" value="blue">blue</option>
-          <option style="color:green;" value="green">green</option>
-          <option style="color:pink;" value="pink">pink</option>
-        </select> | 
-        <input type="button" style="height:21px; width:21px;"value="1" onClick="fontEdit('insertorderedlist')" title="Numbered List" />
-        <input type="button" style="height:21px; width:21px;"value="?" onClick="fontEdit('insertunorderedlist')" title="Bullets List" />
-        <input type="button" style="height:21px; width:21px;"value="?" onClick="fontEdit('outdent')" title="Outdent" />
-        <input type="button" style="height:21px; width:21px;"value="?" onClick="fontEdit('indent')" title="Indent" />
-      </div>
-      <iframe id="textEditor" style="width:500px; height:170px;">
-      </iframe>
-    </div>
-
-    <!--appear comment-->
-    <div id="CNID" class="C_and_N" style="display:none">
-      <img src="/images/comment.png" class="comment tipTip" title="Comment"/>
-    </div>
-    <!--loading -->
-  </body>
-</html>
+            <!-- note part-->
+            <div class="RTE" style="display:none">
+                <div style="width:500px; text-align:left; margin-bottom:10px ">
+                    <input type="button" id="bold" style="height:21px; width:21px; font-weight:bold;" value="B" onClick="fontEdit('bold')" />
+                    <input type="button" id="italic" style="height:21px; width:21px; font-style:italic;" value="I" onClick="fontEdit('italic')" />
+                    <input type="button" id="underline" style="height:21px; width:21px; text-decoration:underline;" value="U" onClick="fontEdit('underline')" /> | 
+                    <input type="button" style="height:21px; width:21px;"value="L" onClick="fontEdit('justifyleft')" title="align left" />
+                    <input type="button" style="height:21px; width:21px;"value="C" onClick="fontEdit('justifycenter')" title="center" />
+                    <input type="button" style="height:21px; width:21px;"value="R" onClick="fontEdit('justifyright')" title="align right" /> | 
+                    <select id="fonts" onChange="fontEdit('fontname',this[this.selectedIndex].value)">
+                        <option value="Arial">Arial</option>
+                        <option value="Comic Sans MS">Comic Sans MS</option>
+                        <option value="Courier New">Courier New</option>
+                        <option value="Monotype Corsiva">Monotype</option>
+                        <option value="Tahoma">Tahoma</option>
+                        <option value="Times">Times</option>
+                    </select>
+                    <select id="size" onChange="fontEdit('fontsize',this[this.selectedIndex].value)">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    <select id="color" onChange="fontEdit('ForeColor',this[this.selectedIndex].value)">
+                        <option value="black">black</option>
+                        <option style="color:red;" value="red">red</option>
+                        <option style="color:blue;" value="blue">blue</option>
+                        <option style="color:green;" value="green">green</option>
+                        <option style="color:pink;" value="pink">pink</option>
+                    </select> | 
+                    <input type="button" style="height:21px; width:21px;"value="1" onClick="fontEdit('insertorderedlist')" title="Numbered List" />
+                    <input type="button" style="height:21px; width:21px;"value="?" onClick="fontEdit('insertunorderedlist')" title="Bullets List" />
+                    <input type="button" style="height:21px; width:21px;"value="?" onClick="fontEdit('outdent')" title="Outdent" />
+                    <input type="button" style="height:21px; width:21px;"value="?" onClick="fontEdit('indent')" title="Indent" />
+                </div>
+                <iframe id="textEditor" style="width:500px; height:170px;">
+                </iframe>
+            </div>
+        </body>
+    </html>

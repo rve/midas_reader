@@ -14,7 +14,10 @@ function def()
   document.getElementById("size").selectedIndex=1;
   document.getElementById("color").selectedIndex=0;
   if (window.localStorage)
-    textEditor.document.body.innerHTML=localStorage.iframe_value;
+    {
+      textEditor.document.body.innerHTML=localStorage.iframe_value;
+      if (textEditor.document.body.innerHTML=='Undefined') textEditor.document.body.innerHTML='';
+    }
 }
 
 function fontEdit(x,y)
@@ -28,7 +31,9 @@ function local_storage()
 {
   if (window.localStorage)
     {
-     localStorage.iframe_value=textEditor.document.body.innerHTML;
+      if (textEditor.document.body.innerHTML=='Undefined') localStorage.iframe_value="";
+      else
+        localStorage.iframe_value=textEditor.document.body.innerHTML;
     }
 }
 

@@ -6,17 +6,16 @@
 
       <div>
         <label for="name">Name:</label>
-        <%= text_field_tag :name, params[:name] %>
+        <%= text_field_tag :name, params[:name] ,:class=>'input'%>
       </div>
 
       <div>
         <label for="password">Password:</label>
-        <%= password_field_tag :password, params[:password] %>
+        <%= password_field_tag :password, params[:password] ,:class=>'input'%>
       </div>
   
-      <div>
-        <%= submit_tag "Login" %>
-      </div>
+          <%= submit_tag "Login" ,:class=>'button'%> 
+          <a href="/users/new" class = "button" >New</a>
     </fieldset>
   <% end %>
 </div>

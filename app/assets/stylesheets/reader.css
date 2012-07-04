@@ -2,35 +2,28 @@ body {
   background:-webkit-linear-gradient(left,rgb(237,236,235),rgb(209,208,208));
 }
 
-.logo
+.show_logo
 {
   margin-top:30px;
   margin-left:50px;
-}
-
-.page_button
-{
-  margin-top:150px;
-  float:left;
-}
-
-.left_button
-{
-  margin-left:100px;
-  margin-top:200px;
-  float:left;
-}
-
-.comment_show_up
-{
-  position:relative;
-  margin-top:150px;
 }
 
 .page
 {
   margin-top:80px;
   margin-left:30px;
+}
+
+.page_button
+{
+  float:left;
+  margin-left:10px;
+  margin-top:200px;
+}
+
+#prev_page
+{
+  margin-top:30px;
 }
 
 .content
@@ -43,13 +36,13 @@ body {
 
 #container
 {
-  position:relative;
-  left:-30px;
+  margin-left:100px;
   background:white;
   float:left;
   width:640px;
   text-align:center;
   margin-top:10px;
+  z-index:3;
 }
 
 .title_line
@@ -58,88 +51,11 @@ body {
   margin-top:30px;
 }
 
-div.whole
-{
-  top:0px;
-  left:0px;
-  width:100%;
-  text-align:center;
-  position:fixed;
-  display:none;
-}
-
-div.scroll
-{
-  overflow:hidden;
-  width:100%;
-  line-height:20px;
-  height:20px;
-  font-size:20px;
-  text-align:center;
-}
-
-
 .note
 {
   position:relative;
   left:-100px;
   float:left;
-}
-
-#CNID
-{
-  position:fixed;
-}
-
-.nearby_comment_content
-{
-  position:relative;
-  width:150px;
-}
-
-.nearby_comment
-{
-  width:150px;
-  float:left;
-  margin-top:200px;
-}
-
-.nearby_comment_bg
-{
-  width:150px;
-}
-
-#commentId,#txtid
-{
-  border:0px;
-  -moz-border-radius:10px;
-  border-radius:10px;
-}
-
-.addCm,.exitComment,.buttoncss,.save
-{
-  margin-top:5px;
-  font-family: "tahoma", "微软雅黑"; 
-  font-size:9pt; 
-  color: #716161; 
-  -moz-border-radius:3px;
-  border-radius:3px;
-  border: 1px #E1E0E0 solid; 
-  background-color: #F3F1F2; 
-  cursor: hand; 
-  font-style: normal ; 
-  width:60px; 
-  height:22px; 
-} 
-
-.strong
-{
-  font-weight:bold;
-}
-
-.italic
-{
-  font-style:italic;
 }
 
 .word
@@ -150,8 +66,24 @@ div.scroll
   display:inline;
 }
 
+#grey_tag
+{
+  position:relative;
+  top:350px;
+  left:-700px;
+  z-index:-1;
+}
 
-.button {
+#red_tag
+{
+  position:relative;
+  top:150px;
+  left:-780px;
+  z-index:-1;
+}
+
+
+.show_button {
   position: relative;
   display: inline-block;
 
@@ -186,7 +118,7 @@ div.scroll
   0px 5px 5px rgba(228,228,228,0.5);
 }
 
-.button:hover {
+.show_button:hover {
   background-color: #8AC5FD;
 
   background-image: -webkit-gradient(
@@ -200,7 +132,7 @@ div.scroll
   );
 }
 
-.button:active {
+.show_button:active {
   top: 4px;
   box-shadow: 		inset 0px 4px 5px rgba(228,228,228,0.4),
   inset 0px -1px 5px rgba(228,228,228,0.2),

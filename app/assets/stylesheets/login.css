@@ -14,49 +14,6 @@
   font-size:15px;
 }
 
-.logo
-{
-  margin-left:50px;
-}
-
-.login
-{
-  display:inline;
-}
-
-.whole
-{
-  margin-top:200px;
-  margin-left:400px;
-}
-
-.forget
-{
-  color: #C2C2C2;
-  font-weight: bold;
-  font-size: 18px;
-  text-decoration: none;
-  position:relative;
-  left:5px;
-  top:-30px;
-}
-
-body
-{
-  background:#E4E4E4;
-}
-
-.username
-{
-  margin-top:1px;
-}
-
-.password
-{
-  margin-top:5px;
-  display:block;
-}
-
 .button {
   position: relative;
   display: inline-block;
