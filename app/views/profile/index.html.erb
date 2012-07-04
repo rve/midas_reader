@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+        <script type="text/javascript" src="/static/js/word_cloud.js"></script>
+        <link rel="stylesheet" href="/static/css/personal.css" />
+    </head>
+    <body onload="draw()">
+        <div class="ceil">
+            <a href="/index">
+                <img src="/images/logo.png" class="logo" /></a>
+        </div>
+        <div class="second_part">
+            <div class="search">
+                <input class="inputbox" type="text" onkeyup="high_light()" id="search_id"/>
+            </div>
+        </div>
+        <canvas id="canvasId" width="1000px" height="500px">
+            <img src="/images/logo.png" class="logo" />
+            <a href="/index" class="home_page">主页</a>
+            <input type="text" onkeyup="search_word()" id="search_id" placeholder="找找TA的特点？" class="search"/>
+            <article class="username"><%= @user.name %></article>
+        </div>
+        <canvas id="canvasId" width="1000px" height="500px" onmousemove="mouse_move(event)" onmouseout="recover_last()">
+            Your browser doesn't support canvas.
+        </canvas>
+    </body>
+</html>

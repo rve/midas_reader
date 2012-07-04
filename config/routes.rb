@@ -9,6 +9,10 @@ Midas::Application.routes.draw do
     delete 'logout' => :destroy
   end
 
+  controller :profile do
+    get 'profile' => :index
+  end
+
 
   resources :users
 
