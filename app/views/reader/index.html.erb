@@ -36,15 +36,17 @@
         <div class="right_part"> 
             <img src="/images/index/logo.png" class="logo" height="50"/>
             <div class="user">
-                <a href="/profile">
-                    <img src="/images/index/user.png" class="user_image"/>
-                </a>
                 <nav class="user_name">
-                    <% if 0 %>
+                    <% if session[:user_id] %>
+                <a href="/profile">
+                   <img src="/images/index/user.png" class="user_image"/>
+                </a>
+                <div><a href="/profile" class="button">个人资料</a></div>
+                        <%= button_to 'Logout', logout_path, :method => :delete, :class => "button" %>
                         <!-- user to be implemented -->
                     <% else %>
-                        <a href="/login" class="button">Login</a>
-                        <a href="#" class="button">Regist</a>
+                        <a href="/login" class="button">登录</a>
+                        <a href="/users/new" class="button">注册</a>
                     <% end %>
                 </nav>
             </div>
