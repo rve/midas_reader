@@ -32,6 +32,14 @@ function touchMove(ev)
   var touch=ev.touches[0];
   mousePos={x:touch.pageX,y:touch.pageY};
   _points.push(mousePos);
+  if (_points.length>1)
+  if (Math.abs(_points[_points.length-1].x-_points[_points.length-2].x)<5>
+          {
+              if (_points[_points.length-1].y<_points[_points.length-2].y)
+      document.body.scrollTop+=2;
+              if (_points[_points.length-1].y>_points[_points.length-2].y)
+      document.body.scrollTop-=2;
+          }
 }
 
 function touchEnd(ev)
