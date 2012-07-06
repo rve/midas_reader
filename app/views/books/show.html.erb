@@ -1,16 +1,19 @@
+
+    <%= javascript_include_tag "http://" + @url_without_port + ":9292/faye.js" %>
 <script type="text/javascript"> 
   var page_num = <%= @page %>;
   var book_id= <%= @book.id %>;
   var prev_page = <%= @page-1 %>;
   var next_page = <%= @page+1 %>
   var max_page_num  = <%= @book.max_page_num %>
+  var client_url = "http://" + "<%= @url_without_port %>" + ":9292/faye";
   def();
   onloadEvent();
 </script>
 <script type="text/javascript">
   $(function() {
     // Create a new client to connect to Faye
-    var client = new Faye.Client('http://localhost:9292/faye');
+    var client = new Faye.Client(client_url);
  
     // Handle form submissions and post messages to faye
     $('#prev_page').click(function(){
@@ -47,7 +50,8 @@
 <script>
   $(function() {
     // Create a new client to connect to Faye
-    var client = new Faye.Client('http://localhost:9292/faye');
+      var client = new Faye.Client(client_url);
+      console.log(client_url);
  
     // Subscribe to the public channel
     var public_subscription = client.subscribe('/messages/public', function(data) {
