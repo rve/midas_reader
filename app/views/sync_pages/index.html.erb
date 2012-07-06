@@ -1,0 +1,23 @@
+<h1>Listing sync_pages</h1>
+<h1>page_num: <%= @user.current_page %> </h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @sync_pages.each do |sync_page| %>
+  <tr>
+    <td><%= link_to 'Show', sync_page %></td>
+    <td><%= link_to 'Edit', edit_sync_page_path(sync_page) %></td>
+    <td><%= link_to 'Destroy', sync_page, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<button onclick="click()">Click</button>
+<%= link_to 'New Sync page', new_sync_page_path %>

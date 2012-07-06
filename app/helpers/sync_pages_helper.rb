@@ -1,0 +1,2 @@
+module SyncPagesHelper
+end

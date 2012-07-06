@@ -4,8 +4,12 @@ one:
   name: MyString
   hashed_password: MyString
   salt: MyString
+  tag: MyString
+  current_page: 1
 
 two:
   name: MyString
   hashed_password: MyString
   salt: MyString
+  tag: MyString
+  current_page: 1

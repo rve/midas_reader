@@ -1,4 +1,8 @@
 Midas::Application.routes.draw do
+  resources :users
+
+  resources :sync_pages
+
   get "admin/index"
 
 #  get "sessions/new"
@@ -13,8 +17,6 @@ Midas::Application.routes.draw do
     get 'profile' => :index
   end
 
-
-  resources :users
 
   get "reader/index"
 

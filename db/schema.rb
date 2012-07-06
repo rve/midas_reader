@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120702164541) do
+ActiveRecord::Schema.define(:version => 20120706043814) do
 
   create_table "books", :force => true do |t|
     t.string   "author"
@@ -23,10 +23,23 @@ ActiveRecord::Schema.define(:version => 20120702164541) do
     t.datetime "updated_at",   :null => false
   end
 
+  create_table "sync_pages", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "tags", :force => true do |t|
+    t.string   "tag_string"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "hashed_password"
     t.string   "salt"
+    t.string   "tag"
+    t.integer  "current_page"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end

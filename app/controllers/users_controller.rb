@@ -36,6 +36,10 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @user }
+    end
   end
 
   # POST /users
