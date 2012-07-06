@@ -18,6 +18,7 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @file = File.readlines(@book.txt_path)
     @user = User.find(session[:user_id])
+    @url = request.raw_host_with_port();
     #@start_page = params[:start_page]
     #@end_page = params[:end_page]
 

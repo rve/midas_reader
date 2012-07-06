@@ -7,7 +7,6 @@
   def();
   onloadEvent();
 </script>
-
 <script type="text/javascript">
   $(function() {
     // Create a new client to connect to Faye
@@ -22,7 +21,23 @@
       });
  
       // Clear the message box
-      console.log(123)
+      //console.log(123)
+ 
+      // Don't actually submit the form, otherwise the page will refresh.
+      return false;
+    });
+
+
+    // Handle form submissions and post messages to faye
+    $('#next_page').click(function(){
+      // Publish the message to the public channel
+      client.publish('/messages/public', {
+        username: '<%= @user.name  %>',
+        msg: next_page
+      });
+ 
+      // Clear the message box
+      //console.log(123)
  
       // Don't actually submit the form, otherwise the page will refresh.
       return false;
@@ -37,7 +52,7 @@
     // Subscribe to the public channel
     var public_subscription = client.subscribe('/messages/public', function(data) {
       console.log(data.username + ": " + data.msg);
-      window.location="http://0.0.0.0:3000/books/<%=@book.id%>?page="+data.msg.toString();
+      window.location="http://<%=@url%>/books/<%=@book.id%>?page="+data.msg.toString();
 
     });
  
