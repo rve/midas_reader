@@ -28,12 +28,6 @@ ActiveRecord::Schema.define(:version => 20120706043814) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "tags", :force => true do |t|
-    t.string   "tag_string"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "hashed_password"

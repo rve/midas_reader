@@ -6,9 +6,11 @@ gem 'rails', '3.2.5'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem 'thin'
 
+gem 'em-websocket'
+
 gem 'sqlite3'
 
-
+gem 'faye'
 
 gem 'will_paginate', '>= 3.0.pre'
 
@@ -42,3 +44,8 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
+gem 'faye'
+gem 'faye'
+
+gem 'execjs'
+gem 'therubyracer',:platforms => :ruby

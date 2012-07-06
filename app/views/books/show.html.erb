@@ -1,125 +1,125 @@
 <script type="text/javascript"> 
-  var page_num = <%= @page %>;
-  var book_id= <%= @book.id %>;
-  var prev_page = <%= @page-1 %>;
-  var next_page = <%= @page+1 %>
-  var max_page_num  = <%= @book.max_page_num %>
-  def();
-  onloadEvent();
+    var page_num = <%= @page %>;
+    var book_id= <%= @book.id %>;
+    var prev_page = <%= @page-1 %>;
+    var next_page = <%= @page+1 %>
+    var max_page_num  = <%= @book.max_page_num %>
+    onloadEvent();
 </script>
 
 <script type="text/javascript">
-  $(function() {
-    // Create a new client to connect to Faye
-    var client = new Faye.Client('http://localhost:9292/faye');
- 
-    // Handle form submissions and post messages to faye
-    $('#prev_page').click(function(){
-      // Publish the message to the public channel
-      client.publish('/messages/public', {
-        username: '<%= @user.name  %>',
-        msg: prev_page
-      });
- 
-      // Clear the message box
-      console.log(123)
- 
-      // Don't actually submit the form, otherwise the page will refresh.
-      return false;
-    });
-  });
-</script>
-<script>
-  $(function() {
-    // Create a new client to connect to Faye
-    var client = new Faye.Client('http://localhost:9292/faye');
- 
-    // Subscribe to the public channel
-    var public_subscription = client.subscribe('/messages/public', function(data) {
-      console.log(data.username + ": " + data.msg);
-      window.location="http://0.0.0.0:3000/books/<%=@book.id%>?page="+data.msg.toString();
+    $(function() {
+            // Create a new client to connect to Faye
+            var client = new Faye.Client('http://localhost:9292/faye');
 
-    });
- 
-    //jump to new page
-    // Handle form submission to publish messages.
-  });
-</script>
-  <!--logo part-->
-  <div class="show_logo">
-    <a href="/"><img src="/images/logo.png" title="MidaReader"/></a>
-  </div>
-  <!--left_button part-->
-  <img src="/images/comment_close.png" id="grey_tag" />
-  <img src="/images/comment_open.png" id="red_tag"/>
+            // Handle form submissions and post messages to faye
+            $('#prev_page').click(function(){
+                // Publish the message to the public channel
+                client.publish('/messages/public', {
+username: '<%= @user.name  %>',
+msg: prev_page
+});
 
-  <!--Show text part-->
-  <% if @book %>
-    <div id="container">
-      <div class="title_line">
-        <img src="/images/title_line.png"/>
-      </div>
-      <div class="page"> 
-        <div class="content" id="contentId">
-          <% for i in ((@page-1)*20)..(@page*20) %>
-            <p> <%= @file[i] %> </p>
-          <% end %>
+                // Clear the message box
+                console.log(123)
+
+                // Don't actually submit the form, otherwise the page will refresh.
+                return false;
+                });
+            });
+        </script>
+        <script>
+            $(function() {
+                // Create a new client to connect to Faye
+                var client = new Faye.Client('http://localhost:9292/faye');
+
+                // Subscribe to the public channel
+                var public_subscription = client.subscribe('/messages/public', function(data) {
+                    console.log(data.username + ": " + data.msg);
+                    window.location="http://0.0.0.0:3000/books/<%=@book.id%>?page="+data.msg.toString();
+
+                });
+
+                //jump to new page
+                // Handle form submission to publish messages.
+            });
+        </script>
+        <!--logo part-->
+        <div class="show_logo">
+            <a href="/"><img src="/images/logo.png" title="MidaReader"/></a>
         </div>
-        <hr/><hr/>
-      <% else %>
-        <div class="content">Please refresh.</div>
-      <% end %>
-    </div>
-  </div>
+        <!--left_button part-->
+        <img src="/images/comment_close.png" id="grey_tag" />
+        <img src="/images/comment_open.png" id="red_tag"/>
 
-  <!--page_button part-->
-  <div class="page_button">
-    <div>
-      <a href = "<%=book_path(@book)%>?page=<%=@page+1%>" id="next_page" class="show_button"></br></br></br>next</a>
-    </div>
-    <div>
-      <a href = "<%=book_path(@book)%>?page=<%=@page-1%>" id="prev_page" class="show_button"></br></br></br>prev</a>
-    </div>
-  </div>
+        <!--Show text part-->
+        <% if @book %>
+            <div id="container">
+                <div class="title_line">
+                    <img src="/images/title_line.png"/>
+                </div>
+                <div class="page"> 
+                    <div class="content" id="contentId">
+                        <% for i in ((@page-1)*20)..(@page*20) %>
+                            <p> <%= @file[i] %> </p>
+                        <% end %>
+                    </div>
+                    <hr/><hr/>
+                <% else %>
+                    <div class="content">Please refresh.</div>
+                <% end %>
+            </div>
+        </div>
 
-  <img src="/images/pen.png" class="note" title="Take note"/>
+        <!--page_button part-->
+        <div class="page_button">
+            <div>
+                <a href = "<%=book_path(@book)%>?page=<%=@page+1%>" id="next_page" class="show_button"></br></br></br>next</a>
+            </div>
+            <div>
+                <a href = "<%=book_path(@book)%>?page=<%=@page-1%>" id="prev_page" class="show_button"></br></br></br>prev</a>
+            </div>
+        </div>
 
-  <!-- note part-->
-  <div class="RTE" style="display:none">
-    <div style="width:500px; text-align:left; margin-bottom:10px ">
-      <input type="button" id="bold" style="height:21px; width:21px; font-weight:bold;" value="B" onClick="fontEdit('bold')" />
-      <input type="button" id="italic" style="height:21px; width:21px; font-style:italic;" value="I" onClick="fontEdit('italic')" />
-      <input type="button" id="underline" style="height:21px; width:21px; text-decoration:underline;" value="U" onClick="fontEdit('underline')" /> | 
-      <input type="button" style="height:21px; width:21px;"value="L" onClick="fontEdit('justifyleft')" title="align left" />
-      <input type="button" style="height:21px; width:21px;"value="C" onClick="fontEdit('justifycenter')" title="center" />
-      <input type="button" style="height:21px; width:21px;"value="R" onClick="fontEdit('justifyright')" title="align right" /> | 
-      <select id="fonts" onChange="fontEdit('fontname',this[this.selectedIndex].value)">
-        <option value="Arial">Arial</option>
-        <option value="Comic Sans MS">Comic Sans MS</option>
-        <option value="Courier New">Courier New</option>
-        <option value="Monotype Corsiva">Monotype</option>
-        <option value="Tahoma">Tahoma</option>
-        <option value="Times">Times</option>
-      </select>
-      <select id="size" onChange="fontEdit('fontsize',this[this.selectedIndex].value)">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-      </select>
-      <select id="color" onChange="fontEdit('ForeColor',this[this.selectedIndex].value)">
-        <option value="black">black</option>
-        <option style="color:red;" value="red">red</option>
-        <option style="color:blue;" value="blue">blue</option>
-        <option style="color:green;" value="green">green</option>
-        <option style="color:pink;" value="pink">pink</option>
-      </select> | 
-      <input type="button" style="height:21px; width:21px;"value="1" onClick="fontEdit('insertorderedlist')" title="Numbered List" />
-      <input type="button" style="height:21px; width:21px;"value="?" onClick="fontEdit('insertunorderedlist')" title="Bullets List" />
-      <input type="button" style="height:21px; width:21px;"value="?" onClick="fontEdit('outdent')" title="Outdent" />
-      <input type="button" style="height:21px; width:21px;"value="?" onClick="fontEdit('indent')" title="Indent" />
-    </div>
-    <iframe id="textEditor" style="width:500px; height:170px;">
-    </iframe>
-  </div>
+        <img src="/images/pen.png" class="note" title="Take note"/>
+
+        <!-- note part-->
+        <div class="RTE" style="display:none">
+            <div style="width:500px; text-align:left; margin-bottom:10px ">
+                <input type="button" id="bold" style="height:21px; width:21px; font-weight:bold;" value="B" onClick="fontEdit('bold')" />
+                <input type="button" id="italic" style="height:21px; width:21px; font-style:italic;" value="I" onClick="fontEdit('italic')" />
+                <input type="button" id="underline" style="height:21px; width:21px; text-decoration:underline;" value="U" onClick="fontEdit('underline')" /> | 
+                <input type="button" style="height:21px; width:21px;"value="L" onClick="fontEdit('justifyleft')" title="align left" />
+                <input type="button" style="height:21px; width:21px;"value="C" onClick="fontEdit('justifycenter')" title="center" />
+                <input type="button" style="height:21px; width:21px;"value="R" onClick="fontEdit('justifyright')" title="align right" /> | 
+                <select id="fonts" onChange="fontEdit('fontname',this[this.selectedIndex].value)">
+                    <option value="Arial">Arial</option>
+                    <option value="Comic Sans MS">Comic Sans MS</option>
+                    <option value="Courier New">Courier New</option>
+                    <option value="Monotype Corsiva">Monotype</option>
+                    <option value="Tahoma">Tahoma</option>
+                    <option value="Times">Times</option>
+                </select>
+                <select id="size" onChange="fontEdit('fontsize',this[this.selectedIndex].value)">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <select id="color" onChange="fontEdit('ForeColor',this[this.selectedIndex].value)">
+                    <option value="black">black</option>
+                    <option style="color:red;" value="red">red</option>
+                    <option style="color:blue;" value="blue">blue</option>
+                    <option style="color:green;" value="green">green</option>
+                    <option style="color:pink;" value="pink">pink</option>
+                </select> | 
+                <input type="button" style="height:21px; width:21px;"value="1" onClick="fontEdit('insertorderedlist')" title="Numbered List" />
+                <input type="button" style="height:21px; width:21px;"value="?" onClick="fontEdit('insertunorderedlist')" title="Bullets List" />
+                <input type="button" style="height:21px; width:21px;"value="?" onClick="fontEdit('outdent')" title="Outdent" />
+                <input type="button" style="height:21px; width:21px;"value="?" onClick="fontEdit('indent')" title="Indent" />
+            </div>
+            <iframe id="textEditor" style="width:500px; height:170px;">
+            </iframe>
+
+        </div>

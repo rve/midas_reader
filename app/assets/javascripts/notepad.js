@@ -1,6 +1,12 @@
-//
 $(document).ready(function(){
   $(".content").annotator();
+
+jQuery("#contentId").annotator().annotator("addPlugin","Offline",{
+    online: function (plugin){
+    },
+offline: function (plugin){
+}
+});
 })
 
 //******************************def*****************************//
@@ -16,7 +22,7 @@ function def()
   if (window.localStorage)
     {
       textEditor.document.body.innerHTML=localStorage.iframe_value;
-      if (textEditor.document.body.innerHTML=='Undefined') textEditor.document.body.innerHTML='';
+      if (textEditor.document.body.innerHTML=='undefined') textEditor.document.body.innerHTML='';
     }
 }
 
@@ -58,3 +64,4 @@ $(document).ready(function()
                                        def();
                                      })
                   })
+
