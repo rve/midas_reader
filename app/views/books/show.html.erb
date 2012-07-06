@@ -1,16 +1,77 @@
+
+    <%= javascript_include_tag "http://" + @url_without_port + ":9292/faye.js" %>
 <script type="text/javascript"> 
+<<<<<<< HEAD
     var page_num = <%= @page %>;
     var book_id= <%= @book.id %>;
     var prev_page = <%= @page-1 %>;
     var next_page = <%= @page+1 %>
     var max_page_num  = <%= @book.max_page_num %>
     onloadEvent();
+=======
+  var page_num = <%= @page %>;
+  var book_id= <%= @book.id %>;
+  var prev_page = <%= @page-1 %>;
+  var next_page = <%= @page+1 %>
+  var max_page_num  = <%= @book.max_page_num %>
+  var client_url = "http://" + "<%= @url_without_port %>" + ":9292/faye";
+  def();
+  onloadEvent();
+>>>>>>> c16bf76625ea159b791984f774fdca0d5f609b0a
 </script>
-
 <script type="text/javascript">
+<<<<<<< HEAD
     $(function() {
             // Create a new client to connect to Faye
             var client = new Faye.Client('http://localhost:9292/faye');
+=======
+  $(function() {
+    // Create a new client to connect to Faye
+    var client = new Faye.Client(client_url);
+ 
+    // Handle form submissions and post messages to faye
+    $('#prev_page').click(function(){
+      // Publish the message to the public channel
+      client.publish('/messages/public', {
+        username: '<%= @user.name  %>',
+        msg: prev_page
+      });
+ 
+      // Clear the message box
+      //console.log(123)
+ 
+      // Don't actually submit the form, otherwise the page will refresh.
+      return false;
+    });
+
+
+    // Handle form submissions and post messages to faye
+    $('#next_page').click(function(){
+      // Publish the message to the public channel
+      client.publish('/messages/public', {
+        username: '<%= @user.name  %>',
+        msg: next_page
+      });
+ 
+      // Clear the message box
+      //console.log(123)
+ 
+      // Don't actually submit the form, otherwise the page will refresh.
+      return false;
+    });
+  });
+</script>
+<script>
+  $(function() {
+    // Create a new client to connect to Faye
+      var client = new Faye.Client(client_url);
+      console.log(client_url);
+ 
+    // Subscribe to the public channel
+    var public_subscription = client.subscribe('/messages/public', function(data) {
+      console.log(data.username + ": " + data.msg);
+      window.location="http://<%=@url%>/books/<%=@book.id%>?page="+data.msg.toString();
+>>>>>>> c16bf76625ea159b791984f774fdca0d5f609b0a
 
             // Handle form submissions and post messages to faye
             $('#prev_page').click(function(){
