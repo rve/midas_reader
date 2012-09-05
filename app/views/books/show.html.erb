@@ -7,7 +7,7 @@
     var next_page = <%= @page+1 %>
     var max_page_num  = <%= @book.max_page_num %>
     onloadEvent();
-=======
+
   var page_num = <%= @page %>;
   var book_id= <%= @book.id %>;
   var prev_page = <%= @page-1 %>;
@@ -23,7 +23,7 @@
     $(function() {
             // Create a new client to connect to Faye
             var client = new Faye.Client('http://localhost:9292/faye');
-=======
+
   $(function() {
     // Create a new client to connect to Faye
     var client = new Faye.Client(client_url);
